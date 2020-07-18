@@ -58,19 +58,32 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  window.addEventListener('keydown', function (e) {
-    var audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    var path = audio.getAttribute('src');
-    var audioFile = new Audio(path);
-    audioFile.play();
-    var key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    key.setAttribute('class', 'key playing');
-  });
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio)
+      return ;
+    audio.currentTime = 0;
+    audio.play();
+    //key.setAttribute('class', 'key playing');
+    key.classList.add('playing'); //https://kimtaekju-study.tistory.com/85
+  }
 
+  function removeTransition() {
+    this.classList.remove('playing');
+  }
+
+  window.addEventListener('keydown', playSound);
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  /* Delay
   window.addEventListener('keyup', function (e) {
     var key = document.querySelector(`div[data-key="${e.keyCode}"]`);
     key.setAttribute('class', 'key');
   });
+  */
 </script>
 
 
