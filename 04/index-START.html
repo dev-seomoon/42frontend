@@ -3,9 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
+  <style>
+    code {
+      color:peru;
+    }
+
+    .halfhr {
+      width: 50%;
+      margin-inline-start: 0px;
+    }
+
+    pre {
+      background-color: rgb(240, 233, 233);
+      width: 80%;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+</br></br>
+  <h2 id="array-methods-filter-map-sort-reduce">
+    Array Methods : filter, map, sort, reduce</h2>
+  <p>함수형 프로그래밍의 게이트웨이
+  </br></br></p>
+  <hr class="halfhr">
+  <h3 id="filter-">Filter 함수</h3>
+  <p>콜백함수의 조건에 해당하는 모든 요소로 새로운 배열을 생성하는 기능</p>
+  <p>콜백함수에는 3개의 매개변수(element, index, array)를 사용할 수 있다.
+  </br></br></p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">const</span> fifteen = inventors.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(inventor)</span></span>{
+        <span class="hljs-keyword">return</span> ((inventor.year &gt;= <span class="hljs-number">1500</span>) &amp;&amp; (inventor.year &lt; <span class="hljs-number">1600</span>));
+      });
+  
+  <span class="hljs-comment">//true나 truty한 값을 리턴하면 새로운 배열에 포함된다. (아무것도 리턴하지 않으면</span>
+  <span class="hljs-comment">//false로 처리되므로 굳이 false를 명시적으로 리턴해줄 필요는 없음.)</span>
+  </code></pre>
+  <p></br>
+  <strong>filter + .includes() 메소드</strong> </p>
+  <p>특정 문자/문자열을 포함한 요소만 걸러내기</p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">const</span> containDe = names.filter(<span class="hljs-keyword">name</span> =&gt; <span class="hljs-keyword">name</span>.includes(<span class="hljs-string">'de'</span>));
+  </code></pre>
+  <p></br>
+  <strong>*arrow function</strong></p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">const</span> fifteen = inventors.<span class="hljs-built_in">filter</span>(inventor =&gt; {
+        <span class="hljs-keyword">return</span> ((inventor.<span class="hljs-built_in">year</span> &gt;= <span class="hljs-number">1500</span>) &amp;&amp; (inventor.<span class="hljs-built_in">year</span> &lt; <span class="hljs-number">1600</span>));
+      });
+  
+  <span class="hljs-keyword">const</span> fifteen = inventors.<span class="hljs-built_in">filter</span>(inventor =&gt; (inventor.<span class="hljs-built_in">year</span> &gt;= <span class="hljs-number">1500</span> &amp;&amp; inventor.<span class="hljs-built_in">year</span> &lt; <span class="hljs-number">1600</span>));
+  </code></pre>
+  <p></br>
+  <strong>*console.table();</strong></p>
+  <p>객체를 테이블 형태로 보여준다
+  </br></br></p></br>
+  <hr class="halfhr">
+  <h3 id="map-">Map 함수</h3>
+  <p>filter는 10개의 element를 받아서 2개만 리턴할 수도 있지만 map은 받은 갯수만큼 리턴한다.</p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">const</span> fullNames = inventors.map(<span class="hljs-function"><span class="hljs-params">inventor</span> =&gt;</span> (inventor.first + <span class="hljs-string">' '</span> + inventor.last));
+      <span class="hljs-built_in">console</span>.log(fullNames);
+  
+  <span class="hljs-comment">//Back tick 사용</span>
+  <span class="hljs-keyword">const</span> fullNames = inventor.map(<span class="hljs-function"><span class="hljs-params">inventor</span> =&gt;</span> (<span class="hljs-string">`<span class="hljs-subst">${inventor.first}</span> <span class="hljs-subst">${inventor.last}</span>`</span>));
+  </code></pre>
+  <p></br></br></p>
+  <hr class="halfhr">
+  <h3 id="sort-">Sort 함수</h3>
+  <p>문자 정렬 : 콜백함수를 지정하지 않아도 아스키 문자 순서대로 자동 정렬됨. </p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">var</span> fruits = [<span class="hljs-string">'orange'</span>, <span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>];
+  
+  fruits.sort(); <span class="hljs-comment">//apple, banana, orange</span>
+  </code></pre>
+  <p></br>
+  숫자 정렬, 객체 정렬 : true/false (혹은 truthy/falsy) 리턴에 따라 정렬됨. </p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">var</span> scores = [<span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>];
+  scores.sort(); <span class="hljs-comment">//1, 10, 11, 2, 3, 4 </span>
+                              <span class="hljs-comment">//ASCII 문자 순서로 정렬됨. (숫자 크기대로 정렬 X)</span>
+  scores.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> (a - b)); <span class="hljs-comment">//오름차순</span>
+  
+  <span class="hljs-keyword">const</span> ordered = inventors.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.year &gt; b.year ? <span class="hljs-number">1</span> : <span class="hljs-number">-1</span>);
+  </code></pre>
+  <p>*정렬할 array의 element 개수가 2개 미만(1개, 0개)일 경우 sort is not a function 에러 발생</p>
+  <p>참고 : <a href="http://dudmy.net/javascript/2015/11/16/javascript-sort/">http://dudmy.net/javascript/2015/11/16/javascript-sort/</a></p>
+  <p></br></br>
+  <strong>sort + split 메서드</strong></p>
+  <p>문자열 전체가 아닌 일부를 기준으로 정렬하고 싶을 때</p>
+  <pre><code class="lang-jsx"><span class="hljs-keyword">const</span> <span class="hljs-built_in">alpha</span> = people.<span class="hljs-built_in">sort</span>((a, b) =&gt; {
+        <span class="hljs-keyword">const</span> [aLast, aFirst] = a.<span class="hljs-built_in">split</span>(<span class="hljs-string">', '</span>);
+        <span class="hljs-keyword">const</span> [bLast, bFirst] = b.<span class="hljs-built_in">split</span>(<span class="hljs-string">', '</span>);
+        <span class="hljs-keyword">return</span> (aLast &gt; bLast) ? <span class="hljs-number">1</span> : <span class="hljs-number">-1</span>;
+      });
+  </code></pre>
+  <p></br></br></p>
+  <hr class="halfhr">
+  <h3 id="reduce-">Reduce 함수</h3>
+  <p>누적값을 파라미터로 사용할 수 있다.</p>
+  <p>배열.reduce((<strong>누적값</strong>, 현잿값, 인덱스, 요소) =&gt; { return 결과 }, 초깃값);
+  </br></br></p>
+  <p>예제1)</p>
+  <pre><code class="lang-jsx">const totalYears = inventors.reduce(<span class="hljs-function"><span class="hljs-params">(acc, cur)</span> =&gt;</span> {
+        <span class="hljs-keyword">return</span> acc += (cur.passed - cur.year);
+      }, <span class="hljs-number">0</span>);
+  </code></pre>
+  <p></br>
+  예제2)</p>
+  <pre><code class="lang-jsx"><span class="hljs-symbol">const</span> transportation = <span class="hljs-meta">data</span>.reduce((obj, <span class="hljs-keyword">item) </span>=&gt; {
+        <span class="hljs-meta">if</span> (!obj[<span class="hljs-keyword">item]) </span>{
+          obj[<span class="hljs-keyword">item] </span>= <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        }
+        obj[<span class="hljs-keyword">item]++;
+  </span>      return obj<span class="hljs-comment">;</span>
+      }, {})
+  </code></pre></br></br>
+  <hr>
+  <h2 id="nodelist-array-">NodeList → Array 변환</h2>
+  <p></br></p>
+  <h3 id="array-from-">Array.from()</h3>
+  <pre><code><span class="hljs-keyword">const</span> links = Array.<span class="hljs-keyword">from</span>(category.querySelectorAll(<span class="hljs-comment">'a'));</span>
+  </code></pre><p></br></p>
+  <h3 id="es6-spread-">ES6 spread 연산자</h3>
+  <pre><code><span class="hljs-keyword">const</span> links = [...category.<span class="hljs-built_in">querySelectorAll</span>(<span class="hljs-string">'a'</span>)];
+  </code></pre><p><a href="https://sheldhe93.tistory.com/13">https://sheldhe93.tistory.com/13</a></p>
+  
+  
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
@@ -31,29 +150,66 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const fullNames = inventors.map(inventor => (`${inventor.first} ${inventor.last}`));
+    console.log(fullNames);
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
+    console.table(inventors);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totalYears = inventors.reduce((acc, cur) => {
+      return acc += (cur.passed - cur.year);
+    }, 0);
+    console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+    inventors.sort((a, b) => (a.passed - a.year) > (b.passed - b.year) ? -1 : 1);
+    console.table(inventors);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    /*
+    const category = document.querySelector('.mw-category');
+    const links = Array.from(category.querySelectorAll('a'));
+    const names = links
+                    .map(link => link.textContent)
+                    .filter(name => name.includes('de'));
+    
+    console.log(names);
+    */
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const alpha = people.sort((a, b) => {
+      const [aLast, aFirst] = a.split(', ');
+      const [bLast, bFirst] = b.split(', ');
+      return (aLast > bLast) ? 1 : -1;
+    });
+    console.log(alpha);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    
+    const transportation = data.reduce((obj, item) => {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {})
 
+    console.log(transportation);
   </script>
 </body>
 </html>
