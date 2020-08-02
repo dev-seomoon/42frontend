@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Array Cardio ğŸ’ªğŸ’ª</title>
+  <title>Array Cardio ?Ÿ’ªğŸ’?</title>
 </head>
 <body>
-  <p><em>Psst: have a look at the JavaScript Console</em> ğŸ’</p>
+  <p><em>Psst: have a look at the JavaScript Console</em> ?Ÿ’?</p>
   <script>
     // ## Array Cardio Day 2
 
@@ -27,14 +27,31 @@
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     // Array.prototype.every() // is everyone 19 or older?
+    const thisYear = new Date().getFullYear();
+    console.log(thisYear);
+    const someCheck = people.some(person => (thisYear - person.year >= 19));
+    console.log(someCheck);
+    const everyCheck = people.every(person => (thisYear - person.year >= 19));
+    console.log(everyCheck);
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const findComment = comments.find(comment => {
+      if (comment.id === 823423)
+        return comment;
+      });
+    console.log(findComment);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    const commentIndex = comments.findIndex(comment => {
+      if (comment.id === 823423)
+        return comment;
+    })
+    if (commentIndex > -1) comments.splice(commentIndex, 1);
+    console.log(comments);
 
   </script>
 </body>
