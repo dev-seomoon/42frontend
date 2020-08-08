@@ -96,6 +96,29 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('input');
+  const arr = [...checkboxes];
+  let lastIndex = -1;
+  let currIndex = -1;
+
+  function check_shiftKey(e) {
+    currIndex = arr.indexOf(e.srcElement);
+    if (e.shiftKey && lastIndex >= 0 && checkboxes[lastIndex].checked) {
+      if (currIndex > lastIndex) {
+        for (var i = lastIndex; i <= currIndex; i++)
+          checkboxes[i].checked = true;
+      }
+      else {
+        for (var i = currIndex; i <= lastIndex; i++)
+          checkboxes[i].checked = true;
+      }
+    }
+    lastIndex = arr.indexOf(e.srcElement);
+  }
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', check_shiftKey);
+  });
 </script>
 </body>
 </html>
