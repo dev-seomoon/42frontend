@@ -6,7 +6,60 @@
   <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+  <h1>Open Console.</h1>
+  <h3>Mac : alt + cmd + i </h3>
+  <h3>Windows : ctrl + shift + i</h3>
 <script>
+  /*
+  const pressed = [];
+  const secretCode = 'wesbos';
+
+  function show_esteregg() {
+    document.write('you found it!');
+  }
+
+  function is_secretCode() {
+    if (pressed.length >= 6) {
+      let start = pressed.length - 6;
+      let last = pressed.length - 1;
+      let codeArr = [];
+      for (let i = start; i <= last; i++)
+      {
+        codeArr.push(pressed[i]);
+      }
+      let code = codeArr.join('');
+      if (code === secretCode)
+        show_esteregg();
+    }
+  }
+
+  window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressed.push(e.key);
+    console.log(pressed);
+    if (e.key === 's')
+      is_secretCode();
+  })
+  */
+ const pressed = [];
+ const secretCode = 'wesbos';
+
+ window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressed.push(e.key);
+    /* splice 함수 : splice(start, deleteCount)
+    start 음수(-n) : 뒤에서부터 n번째 요소
+    deleteCount : 제거할 원소의 갯수
+    */
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length); 
+    console.log(pressed);
+    //check code
+    if (pressed.join('').includes(secretCode)) {
+      console.log('DING DING!');
+      cornify_add();
+    }
+  })
+
 </script>
 </body>
 </html>
