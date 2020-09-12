@@ -3,6 +3,12 @@
 const playButton = document.querySelector('.player__button.toggle');
 const video = document.querySelector('video');
 
+function updateButton() {
+    let icon = this.paused ? 'PLAY' : 'PAUSE';
+    console.log(icon);
+    playButton.textContent = icon;
+}
+
 function togglePlay() {
     if (video.paused)
         video.play();
@@ -11,6 +17,8 @@ function togglePlay() {
 }
 
 playButton.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
 
 
 /*progress bar - show progress rate*/
